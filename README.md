@@ -1,46 +1,67 @@
-# Getting Started with Create React App
+### Como rodar o projeto
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+📌 Pré-requisitos
 
-## Available Scripts
+Antes de iniciar, certifique-se de ter instalado:
 
-In the project directory, you can run:
+- Node.js (versão 18 ou superior)
 
-### `npm start`
+- Yarn ou npm
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- OpenSSL (para gerar certificados SSL)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+🛠 Configuração do ambiente
 
-### `npm test`
+### Clone o repositório:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- git clone https://github.com/seu-usuario/topcon-frontend.git
+- cd topcon-frontend
 
-### `npm run build`
+### Instale as dependências:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+npm install  # ou yarn install
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Gerar as chaves SSL
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+rodar o projeto localmente com HTTPS é preciso gerar um certificado SSL autoassinado usando OpenSSL:
 
-### `npm run eject`
+```
+openssl req -x509 -newkey rsa:4096 -keyout localhost-key.pem -out localhost.pem -days 365 -nodes
+```
+Esse comando criará dois arquivos: localhost.pem (certificado) e localhost-key.pem (chave privada).
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Configuração do arquivo .env
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Renomeie o arquivo .env.example para .env e preencha com as seguintes informações:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+```
+API_URL=https://localhost:7150
+HTTPS=true
+SSL_CRT_FILE=localhost.pem
+SSL_KEY_FILE=localhost-key.pem
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+API_URL: Define a URL base da API do backend.
 
-## Learn More
+HTTPS: Ativa a comunicação segura com SSL.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+SSL_CRT_FILE e SSL_KEY_FILE: Certificados SSL para rodar a aplicação localmente com HTTPS.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Rodar o projeto:
+
+Se estiver usando npm:
+
+npm run dev
+
+A aplicação estará disponível em: http://localhost:3000
+
+🔹 Tecnologias utilizadas
+
+🖥️ Frontend
+
+React (com TypeScript) - Biblioteca para construção da interface do usuário.
+
+Chakra UI - Biblioteca de componentes para estilização.
+
+Axios - Cliente HTTP para comunicação com a API.
+
