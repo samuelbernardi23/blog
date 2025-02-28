@@ -3,10 +3,7 @@ import toast from 'react-hot-toast';
 
 
 const api = axios.create({
-    baseURL: process.env.API_URL,
-    // baseURL: "https://localhost:44397",
-    // baseURL: "https://localhost:7150",
-    // },
+    baseURL: process.env.NODE_ENV,
     withCredentials: true,
 });
 
